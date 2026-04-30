@@ -129,6 +129,11 @@ class SkinsController < ApplicationController
 
   # Get /skins/1/preview
   def preview
+    if (@skin.is_a?(WorkSkin) || !@skin.approved_or_owned_by?(current_user) || @skin.unusable?)
+      flash[:error] = t("skins.preview.cannot_preview")
+      redirect_to user_skins_path(current_user) and return
+    end
+
     flash[:notice] = []
     flash[:notice] << ts("You are previewing the skin %{title}. This is a randomly chosen page.", title: @skin.title)
     flash[:notice] << ts("Go back or click any link to remove the skin.")
