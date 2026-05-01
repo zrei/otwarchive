@@ -640,7 +640,7 @@ describe SkinsController do
         
       context "when logged in as a user who isn't the skin author" do
         it "errors and redirects to skin_path" do
-          fake_login()
+          fake_login
           subject
           success
         end

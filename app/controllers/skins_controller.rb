@@ -129,7 +129,7 @@ class SkinsController < ApplicationController
 
   # Get /skins/1/preview
   def preview
-    if (@skin.is_a?(WorkSkin) || @skin.unusable?)
+    if @skin.is_a?(WorkSkin) || @skin.unusable?
       flash[:error] = t("skins.preview.cannot_preview")
 
       redirect_to skin_path(@skin) and return
