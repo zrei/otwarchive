@@ -3,7 +3,7 @@ class SkinsController < ApplicationController
   before_action :load_skin, except: [:index, :new, :create, :unset]
   before_action :check_ownership_or_admin, only: [:edit, :update]
   before_action :check_ownership, only: [:confirm_delete, :destroy]
-  before_action :check_visibility, only: [:show]
+  before_action :check_visibility, only: [:show, :preview]
   before_action :check_editability, only: [:edit, :update, :confirm_delete, :destroy]
 
   #### ACTIONS
@@ -129,9 +129,10 @@ class SkinsController < ApplicationController
 
   # Get /skins/1/preview
   def preview
-    if (@skin.is_a?(WorkSkin) || !@skin.approved_or_owned_by?(current_user) || @skin.unusable?)
+    if (@skin.is_a?(WorkSkin) || @skin.unusable?)
       flash[:error] = t("skins.preview.cannot_preview")
-      redirect_to user_skins_path(current_user) and return
+
+      redirect_to skin_path(@skin) and return
     end
 
     flash[:notice] = []
