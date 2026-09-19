@@ -1362,7 +1362,6 @@ en:
       page_heading: Icon Alt Text
     icon_comment_text:
       description: You can put anything extra you have about your icon here, like credit for the maker of the icon.
-      page_heading: Icon Comment Text
     preferences_collection:
       allow_collection_invitation:
         changing: Changing this setting won't affect any existing works in collections.
